@@ -1,0 +1,29 @@
+<h3 class="#">Enregistrez votre compte</h3>
+<!--   FORM-->
+<form role="form" method="post">
+<!--   ERREUR-->
+    <div style="background-color:red;"><?=$errors?>
+    </div>
+<!--   LOGIN-->
+    <div class="divLogin">
+        <input type="text" name="login" id="login" class="form-control input-sm" placeholder="Login" value="<?=htmlentities($login)?>">
+    </div>
+<!-- EMAIL-->
+    <div class="divEmail">
+        <input type="email" name="email" id="email" class="form-control input-sm" value="<?=htmlentities($email)?>" placeholder="Email">
+    </div>
+    <div class="divAvatar">
+<!-- PASSWORD 1-->
+    <div class="divMdp">
+        <input type="password" name="password1" id="password" class="form-control input-sm" value='' placeholder="Mot de passe">
+    </div>
+<!-- PASSWORD 2-->
+    <div class="divMdp">
+        <input type="password" name="password2" id="password_confirmation" class="form-control input-sm" value='' placeholder="Confirmez mot de passe">
+    </div>
+<!-- AVATAR-->
+        <input type="text" name="avatar" id="avatar" class="form-control input-sm" value="<?=htmlentities($avatar)?>" placeholder="URL de votre avatar">
+    </div>
+
+    <input type="submit" value="Enregistrer" class="btnLogin">
+</form>

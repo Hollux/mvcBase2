@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MVC BASE</title>
+    <link rel="stylesheet" href="./public/css/stylesheet.css" type="text/css">
+   										 <!-- 	viewport, pas de zoom -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+										<!-- 	reset Css(pas mis) -->
+	<link rel="stylesheet" type="text/css" href="./public/css/reset.css" />
+										<!--	BOOTSTRAP -->
+	<link href="./public/css/bootstrap.min.css" rel="stylesheet">
+												<!-- 	JQUERY -->
+	<script type="text/javascript" src="./public/script/jquery-2.1.4.min.js"></script>
+											<!-- 	js carousel -->
+	<script type="text/javascript" href="./public/script/owlCarousel/jquery-2.1.4.min.js"></script>
+	
+											<!-- Css carousel -->
+	<!-- <link rel="stylesheet" type="text/css" href="./public/css/owlCarousel/owl.carousel.css" />
+	<link rel="stylesheet" type="text/css" href="./public/css/owlCarousel/owl.theme.css" /> -->
+
+											<!-- 	le css (en less) -->
+	<link type="text/css" rel="stylesheet/less" href="./public/css/stylesheet.less"/>
+										<!-- 	Less -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
+
+</head>
+	<body>
+		<?php require('apps/nav.php'); ?>
+		<?php require('apps/header.php'); ?>
+		<div class="container">
+			<?php require('apps/content.php'); ?>
+			<?php require('apps/footer.php'); ?>
+		</div>
+		<script type="text/javascript" src="./public/script/script.js"></script>
+				<!-- BOOTSTRAP	 -->
+		<script src="./public/script/bootstrap.min.js"></script>
+	</body>
+</html>
