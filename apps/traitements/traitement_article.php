@@ -2,10 +2,11 @@
 if (isset($_GET['page']))
 {
 	$action = $_GET['page'];
+
 var_dump($_GET, $_SESSION, $currentUser, $_POST);
 exit;
 
-	if ($action == 'create')
+	if ($action == 'addArticle')
 	{
 		if (isset($_POST['title'], $_POST['content'], $_POST['image']))
 		{

@@ -31,14 +31,15 @@ if (isset($_SESSION['id']))
 
 // autorisation pages
 $access_public 	= array('home', 'rien', 'register', 'login');
-$access_user 	= array('home','rien', 'logout', 'addArticle', 'articles', 'profil');
+$access_user 	= array('home','rien', 'logout', 'addArticle', 'articles', 'profil', 'addCategory', 'addCategory');
 $access_admin	= array('', '', '');
 
 // fichier traitement
-$traitements_public 	= array('login' 	=> 'user',
-								'register'	=> 'user',
-								'addArticle'=> 'article');
-$traitements_user 		= array('addArticle'=> 'article');
+$traitements_public 	= array('login' 		=> 'user',
+								'register'		=> 'user',
+								'addArticle'	=> 'article');
+$traitements_user 		= array('addArticle'	=> 'article',
+								'addCategory'	=> 'category');
 $traitements_admin		= array('dashboard_users' 		=> 'user',
 							'dashboard_items' 			=> 'item',
 							'dashboard_order' 			=> 'order',
