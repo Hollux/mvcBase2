@@ -3,15 +3,12 @@ if (isset($_GET['page']))
 {
 	$action = $_GET['page'];
 
-var_dump($_GET, $_SESSION, $currentUser, $_POST);
-exit;
-
 	if ($action == 'addArticle')
 	{
 		if (isset($_POST['title'], $_POST['content'], $_POST['image']))
 		{
 			$manager = new ArticleManager($db);
-			$idAuthor = $_SESSION['$id'];
+			$idAuthor = $_SESSION['id'];
 			try
 			{
 				$retour = $manager->create($_POST['title'], $_POST['content'], $_POST['image'], $idAuthor);
@@ -30,7 +27,7 @@ exit;
 			exit;
 		}
 	}
-	else if ($action == 'update')
+	else if ($action == 'updateArticle')
 	{
 		if (isset($_POST['title'], $_POST['content'], $_POST['image']))
 		{
@@ -44,7 +41,7 @@ exit;
                 $article 	-> setContent($_POST['content']);
                 $article 	-> setImage($_POST['image']);
 
-                $retour 	-> $manager -> update($article)
+                $retour 	-> $manager -> update($article);
 			}
 			else
 			{

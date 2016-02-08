@@ -1,0 +1,12 @@
+.center
+{
+	text-align: center;
+}
+.border
+{
+	border:1px solid black;
+}
+img
+{
+	max-width: 100%;
+}

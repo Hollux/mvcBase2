@@ -1,0 +1,35 @@
+<div class="topic contenuTab">
+	<div class="tabEsclave">
+		<div class="row">
+			<a href="?page=XtopicX&id=<?=$topic->getId(); ?>">
+				<div class="col-sm-1">
+					<?php 
+						if($link == false)
+						{
+							echo('<img src="./public/img/forum/mangue1.jpg" alt="lu">');
+						} 
+						else
+						{
+							echo('<img src="./public/img/forum/mangue2.jpg" alt="non-lu">');
+						}
+					?>
+				</div>
+				<div class="col-sm-6"><p><?=htmlentities($topic->getTitle()); ?></p></div>
+			</a>
+			<div class="col-sm-1"><p class="center"><?=$Nrep; ?></p></div>
+			<div class="col-sm-1"><a  href="?page=profil&id=<?=$userTopic->getId(); ?>" class="center"><?=htmlentities($userTopic->getLogin()); ?></a></div>
+			<div class="col-sm-1"><p class="center"><?=htmlentities($topic->getVues()); ?></p></div>
+			<div class="col-sm-2"><p class="center">
+				<?php 
+				if(($lastPost) == TRUE)
+					{ 
+						echo(htmlentities($lastPost->getDate()));
+					}else
+					{
+						echo("Aucun message");
+					}
+				?>
+			</p><a href="?page=profil&id=<?=$userLastPost->getId(); ?>" class="center"><p><?php echo($userLastPost->getLogin()); ?></p></a></div>
+		</div>
+	</div>
+</div>

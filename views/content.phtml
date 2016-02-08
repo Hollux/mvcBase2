@@ -1,4 +1,21 @@
 <?php
 if ( isset($page)) {
-	require ('apps/'.$page.'.php');}
+
+	$forum = array('addCategory', 'addPost', 'addSCategory', 'addTopic', 'XcategoryX', 'XcategorysX', 
+		'XsCategoryX', 'XtopicX');
+
+
+	if(in_array($page, $forum))
+	{
+		require ('apps/forum/'.$page.'.php');
+	}
+	else
+	{
+		require ('apps/'.$page.'.php');
+	}
+
+}
 ?>
+
+
+

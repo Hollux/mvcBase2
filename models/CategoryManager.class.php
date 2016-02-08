@@ -1,5 +1,5 @@
 <?php
-class ArticleManager
+class CategoryManager
 {
 	private $db;
 
@@ -8,15 +8,14 @@ class ArticleManager
 		$this -> db = $db;
 	}
 
-	public function create($title, $content, $image, $idAuthor)
+	public function create($title, $content, $idAuthor)
 	{
-		$article = new Article($this->db);
+		$category = new Category($this->db);
 		try
 		{
-			$article -> setTitle($title);
-			$article -> setContent($content);
-			$article -> setImage($image);
-			$article -> setIdAuthor($idAuthor);
+			$category -> setTitle($title);
+			$category -> setContent($content);
+			$category -> setIdAuthor($idAuthor);
 		}
 		catch (Exception $e)
 		{
@@ -25,21 +24,12 @@ class ArticleManager
 		}
 		if(!isset($err))
 		{
-			$title 		= $this -> db -> quote($article -> getTitle());
-			$content 	= $this -> db -> quote($article -> getContent());
-			$idAuthor 	= $article -> getIdAuthor();
+			$title 		= $this -> db -> quote($category -> getTitle());
+			$content 	= $this -> db -> quote($category -> getContent());
+			$idAuthor 	= $category -> getIdAuthor();
 
-			if ($image == "") 
-			{
-				$query		='INSERT INTO article(title, content, idAuthor)
+			$query		='INSERT INTO category(title, content, idAuthor)
 						VALUE ('.$title.','.$content.','.$idAuthor.')';
-			}
-			else
-			{
-				$image 		= $this -> db -> quote($article -> getImage());
-				$query		='INSERT INTO article(title, content, image, idAuthor)
-						VALUE ('.$title.','.$content.','.$image.','.$idAuthor.')';
-			}
  		}
  		$res			=$this -> db -> exec($query);
  		if($res)
@@ -62,10 +52,10 @@ class ArticleManager
  		}
 	}
 
-	public function delete(Article $article)
+	public function delete(Category $cate)
 	{
-		$id = $article->getId();
-		$query = "DELETE FROM article WHERE id='".$id."'";
+		$id = $category->getId();
+		$query = "DELETE FROM category WHERE id='".$id."'";
 		$res = $this -> db -> exec($query);
 		if ($res)
 		{
@@ -77,15 +67,15 @@ class ArticleManager
 		}
 	}
 
-	public function update(Article $article)
+	public function update(Category $category)
 	{
-		$id 		= $article -> getId();
+		$id 		= $category -> getId();
 		$title 		= $this -> db -> quote($title -> getTitle());
 		$content 	= $this -> db -> quote($content -> getContent());
 		$image 		= $this -> db -> quote($image -> getImage());
 		$idAuthor 	= $_SESSION['id'];
 
-		$query 		= '	UPDATE article
+		$query 		= '	UPDATE category
 						SET title 		='.$title.',
 							content 	='.$content.',
 							image 		='.$image.',
@@ -110,12 +100,12 @@ class ArticleManager
 
 	public function getList()
 	{
-		$query = "SELECT * FROM article";
+		$query = "SELECT * FROM category";
 		$res 	= $this -> db -> query($query);
 		if ($res)
 		{
-			$articles = $res -> fetchAll(PDO::FETCH_CLASS, 'Article', array($this -> db));
-			return $articles;
+			$categorys = $res -> fetchAll(PDO::FETCH_CLASS, 'Category', array($this -> db));
+			return $categorys;
 		}
 		else
 		{
@@ -125,12 +115,12 @@ class ArticleManager
 
 	public function getLasts()
 	{
-		$query = "SELECT * FROM article ORDER BY date DESC LIMIT 20";
+		$query = "SELECT * FROM category ORDER BY date DESC LIMIT 20";
 		$res 	= $this -> db -> query($query);
 		if ($res)
 		{
-			$articles = $res -> fetchAll(PDO::FETCH_CLASS, 'Article', array($this -> db));
-			return $articles;
+			$categorys = $res -> fetchObject('category', array($this -> db));
+			return $categorys;
 		}
 		else
 		{
@@ -140,18 +130,18 @@ class ArticleManager
 	public function findById($id)
 	{
 		$id = intval($id);
-		$query = "SELECT * FROM article WHERE id='".$id."'";
+		$query = "SELECT * FROM category WHERE id='".$id."'";
 		$res = $this -> db -> query($query);
 		if ($res)
 		{
-			$article = $res -> fetchObject('article', array($this -> db));
-			if ($article)
+			$category = $res -> fetchObject('category', array($this -> db));
+			if ($category)
 			{
-				return $article;
+				return $category;
 			}
 			else
 			{
-				return "Article not found";
+				return "Category not found";
 			}
 		}
 		else

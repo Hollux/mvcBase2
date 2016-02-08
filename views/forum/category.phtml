@@ -1,0 +1,19 @@
+<div class="category">
+	<div class="tabMaitre">
+		<div class="row">
+			<div class="col-sm-3">
+				<p><?=htmlentities($category->getTitle()); ?></p>
+			</div>
+			<div class="col-sm-7">
+				<p><?=htmlentities($category->getContent()); ?></p>
+			</div>
+			<div class="col-sm-2">
+				<a href="?page=profil&id='<?=$userCategory->getId();?>'"><?=htmlentities($userCategory->getLogin()); ?></a>
+			</div>
+		</div>
+	</div>
+	<?php 
+		require("apps/forum/sCategorys.php");
+	?>
+</div>
+<br>

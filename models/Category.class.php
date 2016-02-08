@@ -1,10 +1,9 @@
 <?php 
-class Article
+class Category
 {
 	private $id;
 	private $title;
 	private $content;
-	private $image;
 	private $id_author;
 	private $date;
 	private $db;
@@ -27,10 +26,6 @@ class Article
 	public function getContent()
 	{
 		return $this -> content;
-	}
-	public function getImage()
-	{
-		return $this -> image;
 	}
 	public function getIdAuthor()
 	{
@@ -65,22 +60,6 @@ class Article
 		else
 		{
 			throw new Exception("Content incorrect (4/2048 characters)");
-		}
-	}
-
-	public function setImage($image)
-	{
-		if($image !== "")
-		{
-			if (filter_var($image, FILTER_VALIDATE_URL))
-			{
-				$this -> image = $image;
-				return true;
-			}
-			else
-			{
-				throw new Exception("URL incorrecte");
-			}
 		}
 	}
 

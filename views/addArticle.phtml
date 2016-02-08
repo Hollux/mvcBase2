@@ -2,12 +2,11 @@
 
 <form role="form" method="post">
 	<!--   ERREUR-->
-	<?php var_dump($_POST); ?>
-    <div style="background-color:red;"><?=$errors?>
-    </div>
+    <div style="background-color:red;"><?=$errors?></div>
+    
     <input type="text" name="title" id="title" class="form-control input-sm" placeholder="title" value="<?=htmlentities($title)?>">
     <input type="text" name="content" id="content" class="form-control input-sm" placeholder="content" value="<?=htmlentities($content)?>">
-    <input type="text" name="image" id="image" class="form-control input-sm" placeholder="image" value="<?=htmlentities($image)?>">
+    <input type="text" name="image" id="image" class="form-control input-sm" placeholder="url image" value="<?=htmlentities($image)?>">
 
     <input type="submit" value="Enregistrer" class="btnLogin">
 </form>

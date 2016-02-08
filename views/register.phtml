@@ -11,8 +11,10 @@
 <!-- EMAIL-->
     <div class="divEmail">
         <input type="email" name="email" id="email" class="form-control input-sm" value="<?=htmlentities($email)?>" placeholder="Email">
+        <p>Autorisez vous l'affichage de votre adresse email ?</p>
+        <label class="radio-inline"><input type="radio" name="public">Oui</label>
+        <label class="radio-inline"><input type="radio" name="private">Non</label>
     </div>
-    <div class="divAvatar">
 <!-- PASSWORD 1-->
     <div class="divMdp">
         <input type="password" name="password1" id="password" class="form-control input-sm" value='' placeholder="Mot de passe">
@@ -22,6 +24,7 @@
         <input type="password" name="password2" id="password_confirmation" class="form-control input-sm" value='' placeholder="Confirmez mot de passe">
     </div>
 <!-- AVATAR-->
+    <div class="divAvatar">
         <input type="text" name="avatar" id="avatar" class="form-control input-sm" value="<?=htmlentities($avatar)?>" placeholder="URL de votre avatar">
     </div>
 

@@ -1,11 +1,11 @@
 <?php 
-class Article
+class SCategory
 {
 	private $id;
 	private $title;
 	private $content;
-	private $image;
 	private $id_author;
+	private $id_category;
 	private $date;
 	private $db;
 
@@ -28,13 +28,24 @@ class Article
 	{
 		return $this -> content;
 	}
-	public function getImage()
-	{
-		return $this -> image;
-	}
 	public function getIdAuthor()
 	{
 		return $_SESSION['id'];
+	}
+
+			/*A VERIFIER*/
+	public function getCategory()
+	{
+		if (!$this->category)
+		{
+			$categoryManager = new CategoryManager($this->db);
+			$this->category = $categoryManager->findById($this->id_category);
+		}
+		return $this->category;
+	}
+	public function getIdCategory()
+	{
+		return $this->id_category;
 	}
 	public function getDate()
 	{
@@ -68,22 +79,6 @@ class Article
 		}
 	}
 
-	public function setImage($image)
-	{
-		if($image !== "")
-		{
-			if (filter_var($image, FILTER_VALIDATE_URL))
-			{
-				$this -> image = $image;
-				return true;
-			}
-			else
-			{
-				throw new Exception("URL incorrecte");
-			}
-		}
-	}
-
 	public function setIdAuthor($idAuthor)
 	{
 		if($idAuthor == ($_SESSION['id']))
@@ -91,6 +86,17 @@ class Article
 			$this -> idAuthor = $idAuthor;
 			return true;
 		}
+		else
+		{
+			throw new Exception("problem id author");
+		}
+	}
+
+		/*A VERIFIER*/
+	public function setCategory(Category $category)
+	{
+		$this->id_category = $category->getId();
+		return true;
 	}
 
 	public function setDate($date)

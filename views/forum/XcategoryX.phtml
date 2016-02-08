@@ -1,0 +1,9 @@
+<?php 
+	require('apps/forum/category.php');
+	if($currentUser->getPrivilege() >= 1)
+ 	{
+ 		echo('<a href="?page=addSCategory&id='.$category->getId().'"><button class="btn">Ajouter une sous-categorie</button></a>');
+ 	}
+
+ ?>
+	

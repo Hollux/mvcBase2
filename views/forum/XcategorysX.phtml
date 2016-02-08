@@ -1,0 +1,8 @@
+<?php 
+	require('apps/forum/categorys.php');
+	
+ 	if($currentUser->getPrivilege() >= 1)
+ 	{
+ 		echo('<a href="?page=addCategory"><button class="btn">Ajouter une categorie</button></a>');
+ 	}
+ ?>

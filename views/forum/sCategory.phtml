@@ -1,0 +1,18 @@
+<div class="sCategory">
+	<div class="tabMaitre">
+		<div class="row">
+			<div class="col-sm-7">
+				<h4><?=htmlentities($sCategory->getTitle()); ?></h4>
+				<p><?=htmlentities($sCategory->getContent()); ?></p>
+			</div>
+			<div class="col-sm-1 center">Réponses</div>
+			<div class="col-sm-1 center">Auteur</div>
+			<div class="col-sm-1 center">Vues</div>
+			<div class="col-sm-2 center">Derniers Messages</div>
+		</div>
+	</div>
+	<?php 
+		require('apps/forum/topics.php');	
+	?>
+</div>
+<br>

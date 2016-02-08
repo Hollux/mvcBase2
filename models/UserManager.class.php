@@ -8,13 +8,14 @@ class UserManager
 		$this -> db = $db;
 	}
 
-	public function create($login, $password1, $password2, $email, $avatar)
+	public function create($login, $password1, $password2, $email, $public, $avatar)
 	{
 		$user = new User($this->db);
 		try
 		{
 			$user -> setLogin($login);
 			$user -> setEmail($email);
+			$user -> setPublic($public);
 			$user -> setAvatar($avatar);
 			$user -> setPassword($password1, $password2);
 		}
@@ -30,14 +31,14 @@ class UserManager
 			$password 	= $user -> getPassword();
 			if($avatar == "")
 			{
-				$query		= '	INSERT INTO user (email, login, password)
-							VALUES ('.$email.','.$login.',"'.$password.'")';
+				$query		= '	INSERT INTO user (email, public, login, password)
+							VALUES ('.$email.','.$public.' '.$login.',"'.$password.'")';
 			}
 			else
 			{
 				$avatar 	= $this -> db -> quote($user -> getAvatar());
-				$query		= '	INSERT INTO user (email, login, avatar, password)
-							VALUES ('.$email.','.$login.','.$avatar.',"'.$password.'")';
+				$query		= '	INSERT INTO user (email, public, login, avatar, password)
+							VALUES ('.$email.','.$public.' '.$login.','.$avatar.',"'.$password.'")';
 			}
 			$res		= $this -> db -> exec($query);
 			if ($res)
@@ -60,7 +61,7 @@ class UserManager
 		}
 		else
 		{
-			throw new Exception('erreur venant des try');
+			throw new Exception($errors);
 		}
 	}
 
@@ -199,5 +200,108 @@ class UserManager
 			return false;
 		}
 	}
+
+	/*FORUM*//*FORUM*//*FORUM*//*FORUM*//*FORUM*//*FORUM*//*FORUM*//*FORUM*//*FORUM*//*FORUM*//*FORUM*/
+
+						/*PARTIE AJOUT USER*/
+	public function addTopicUser(Topic $topic)
+	{
+
+		$query = "SELECT id FROM user";
+		$res = $this -> db -> query($query);
+		if ($res)
+		{
+			$users = $res -> fetchALL(PDO::FETCH_CLASS, 'User', array($this -> db));
+			if($users)
+			{
+				$i = 0;
+				$c = count($users);
+				while($i < $c)
+				{
+					$user = $users[$i];
+					$idUser = $user->getId();
+					$idTopic = $topic->getId();
+
+					$query = "SELECT COUNT(id_user) FROM link_user_topic 
+						WHERE id_user=".$idUser." AND id_topic= ".$idTopic."";
+					$res2 = $this -> db -> query($query);
+					if($res2 == true)
+					{
+						$i++;
+					}
+					else
+					{
+						$query = 'INSERT INTO link_user_topic (id_user, id_topic)
+								VALUES ('.$idUser.','.$idTopic.')';
+						$res3 = $this -> db -> query($query);
+						if($res3)
+						{
+							$i++;
+						}
+						else
+						{
+							$o = $i;
+							$i = $c;
+							throw new Exception('error DB ('.$o.','.$query.')');
+						}
+					}
+				}
+			}
+			else
+			{
+				throw new Exception('bug bug bug');
+			}
+		}
+	}
+
+	public function findLink($idUser, $idTopic)
+	{
+		$query = "SELECT * FROM link_user_topic 
+			WHERE id_user=".$idUser." AND id_topic= ".$idTopic."";
+		$res = $this -> db -> query($query);
+		if($res)
+		{
+			$link = $res -> fetchAll();
+			if($link)
+			{
+				return $this;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			throw new Exception ('error findLink');
+		}
+	}
+
+	public function deletLink($idUser, $idTopic)
+	{
+		$query = "SELECT COUNT(id_user) FROM link_user_topic 
+			WHERE id_user=".$idUser." AND id_topic= ".$idTopic."";
+		$res = $this -> db -> exec($query);
+		var_dump($res);
+		echo('<br>');
+		/*if($res == 0)
+		{
+			echo('toto');
+		}*/
+		/*else
+		{
+			$query 	= "DELETE FROM link_user_topic WHERE id_user=".$idUser." AND id_topic=".$idTopic."";
+			$res 	= $this -> db -> exec($query);
+			if ($res)
+			{
+				return true;
+			}
+			else
+			{
+				throw new Exception("Internal Server Error");
+			}
+		}*/
+	}
+
 }
 ?>

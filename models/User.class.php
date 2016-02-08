@@ -5,10 +5,12 @@ class User
 	private $login;
 	private $password;
 	private $email;
+	private $public;
 	private $avatar;
 	private $date;
 	private $last_date;
 	private $date_registration;
+	private $privilege;
 	private $db;
 
 	//Construct
@@ -35,6 +37,10 @@ class User
 	{
 		return $this->email;
 	}
+	public function getPublic()
+	{
+		return $this->public;
+	}
 	public function getAvatar()
 	{
 		return $this->avatar;
@@ -49,7 +55,11 @@ class User
 	}
 	public function getDateRegistration()
 	{
-		return $this -> date_registration;
+		return $this->date_registration;
+	}
+	public function getPrivilege()
+	{
+		return $this->privilege;
 	}
 
 	public function setLogin($login)
@@ -91,7 +101,20 @@ exit;*/
 		}
 		else
 		{
-			throw new Ecveption ("Email incorrect");
+			throw new Exception ("Email incorrect");
+		}
+	}
+
+	public function setPublic($public)
+	{
+		if (intval($public) == 0 || intval($public) == 1)
+		{
+			$this->public = $public;
+			return true;
+		}
+		else
+		{
+			throw new Exception('Error email public or private');
 		}
 	}
 
@@ -167,6 +190,20 @@ exit;*/
 		else
 		{
 			throw new Exception('Format needs to be a timestamp');
+		}
+	}
+
+	// Set privilege
+	public function setPrivilege($privilege)
+	{
+		if(intval($privilege))
+		{
+			$this->privilege = $privilege;
+			return true;
+		}
+		else
+		{
+			throw new Exception('Format privilege unknow');
 		}
 	}
 }

@@ -1,0 +1,11 @@
+<div class="post">
+	<div class="element1 center border">
+		<p><?=$userPost->getLogin(); ?></p>
+		<img src="<?=$userPost->getAvatar(); ?>" alt="Avatar" width="100%">
+		<p>Messages : <?=htmlentities($NpostUser); ?></p>
+		<p>Date d'inscription : <?=htmlentities($userPost->getDate()); ?></p>
+	</div>
+	<div class="element2 border">
+		<p><?=htmlentities($post->getContent()); ?></p>
+	</div>
+</div>

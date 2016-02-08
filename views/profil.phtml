@@ -4,6 +4,11 @@
  	</div>
  	<div class="col-md-9">
  		<h3><?=$user->getLogin()?></h3>
- 		<h4><?=$user->getEmail()?></h4>
+ 		<?php 
+ 		if($user->getPublic() == 1)
+ 		{
+ 			echo('<h4>'.$user->getEmail().'</h4>');	
+ 		}
+ 		?>
  	</div>
  </div>

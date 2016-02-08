@@ -1,0 +1,9 @@
+<?php 
+	require('apps/forum/topic.php');
+
+	if(isset($currentUser))
+	{
+		echo('<a href="?page=addPost&id='.$topic->getId().'"><button class="btn">Répondre</button></a>');
+	}
+
+ ?>

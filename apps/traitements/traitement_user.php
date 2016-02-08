@@ -20,8 +20,9 @@ if (isset($_GET['page']))
 			{
 				if ($user->verifPassword($_POST['password']))
 				{
-					$_SESSION['id'] 	= $user->getId();
-					$_SESSION['succes']	="Login succesfull";
+					$_SESSION['id'] 		= $user->getId();
+					$_SESSION['privilege'] 	= $user->getPrivilege();
+					$_SESSION['succes']		="Login succesfull";
 					try
 					{
 						$user -> setDateConnection(time());
@@ -50,10 +51,18 @@ if (isset($_GET['page']))
 	{
 		if (isset($_POST['login'], $_POST['password1'], $_POST['password2'], $_POST['email'], $_POST['avatar']))
 		{
+			if(isset($_POST['public']))
+			{
+				$public = "1";
+			}
+			else
+			{
+				$public = "0";
+			}
 			$manager = new UserManager($db);
 			try
 			{
-				$retour = $manager->create($_POST['login'], $_POST['password1'], $_POST['password2'], $_POST['email'], $_POST['avatar']);
+				$retour = $manager->create($_POST['login'], $_POST['password1'], $_POST['password2'], $_POST['email'], $public, $_POST['avatar']);
 			}
 			catch(Exception $e)
 			{

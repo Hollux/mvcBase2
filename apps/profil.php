@@ -1,8 +1,9 @@
 <?php 
-	if(isset($_SESSION['id']))
+	if(isset($_GET['id']))
 	{
+		$id = intval($_GET['id']);
 		$userManager = new UserManager($db);
-		$user = $userManager->findById($_SESSION['id']);
+		$user = $userManager->findById($id);
 		require('views/profil.phtml');
 	}
 	else

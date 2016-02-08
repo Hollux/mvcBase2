@@ -1,0 +1,28 @@
+<div class="sCategory contenuTab">
+	<div class="tabEsclave">
+		<div class="row">
+			<div class="col-sm-1"><img src="./public/img/forum/mangue1.jpg" alt="lu"></div>
+			<a href="?page=XsCategoryX&id=<?=$sCategory->getId(); ?>">
+				<div class="col-sm-7">
+					<h4><?=htmlentities($sCategory->getTitle()); ?></h4>
+				</div>
+			</a>
+			<div class="col-sm-1"><p class="center"><?=$nTopic; ?></p></div>
+			<div class="col-sm-1"><p class="center"><?=$nPost; ?></p></div>
+			<div class="col-sm-2">
+				<?php 
+					if($nPost !== 0)
+					{
+						echo('<p class="center">'.htmlentities($lastPost->getDate()).'</p><a href="?page=profil&id='.$userLastPost->getId().'" class="center"><p>'.$userLastPost->getLogin().'</p></a>');
+					}
+					else
+					{
+						echo('<p class="center">Aucun message</p>');
+					}
+				 ?>
+				
+			</div>
+			<div class="col-sm-7"><p><?=htmlentities($sCategory->getContent()); ?></p></div>
+		</div>
+	</div>
+</div>

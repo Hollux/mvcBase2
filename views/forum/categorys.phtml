@@ -1,0 +1,24 @@
+<div class="category">
+	<div class="tabMaitre">
+		<div class="row">
+			<a href="?page=XcategoryX&id=<?=$category->getId();?>">
+			<div class="col-sm-8">
+				<p><?=htmlentities($category->getTitle()); ?></p>
+			</div>
+			<div class="col-sm-1">
+				<p>sujets</p>
+			</a>
+			</div>
+			<div class="col-sm-1">
+				<p>messages</p>
+			</div>
+			<div class="col-sm-2">
+				<p>Derniers messages</p>
+			</div>
+		</div>
+	</div>
+		<?php 
+			require('apps/forum/sCategorys.php')
+		 ?>
+</div>
+<br>

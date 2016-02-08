@@ -1,0 +1,8 @@
+<?php 
+	require('apps/forum/sCategory.php');
+
+	if(isset($currentUser))
+	{
+		echo('<a href="?page=addTopic&id='.$sCategory->getId().'"><button class="btn">Ajouter un topic</button></a>');
+	}
+ ?>

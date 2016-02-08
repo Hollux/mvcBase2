@@ -31,15 +31,19 @@ if (isset($_SESSION['id']))
 
 // autorisation pages
 $access_public 	= array('home', 'rien', 'register', 'login');
-$access_user 	= array('home','rien', 'logout', 'addArticle', 'articles', 'profil', 'addCategory', 'addCategory');
+$access_user 	= array('home', 'ok', 'rien', 'logout', 'addArticle', 'articles', 'profil', 'addCategory', 
+						'XcategorysX', 'XcategoryX', 'addSCategory', 'XsCategoryX', 'addTopic', 'XtopicX', 
+						'addPost');
 $access_admin	= array('', '', '');
 
 // fichier traitement
 $traitements_public 	= array('login' 		=> 'user',
-								'register'		=> 'user',
-								'addArticle'	=> 'article');
+								'register'		=> 'user');
 $traitements_user 		= array('addArticle'	=> 'article',
-								'addCategory'	=> 'category');
+								'addCategory'	=> 'category',
+								'addSCategory'	=> 'sCategory',
+								'addTopic'		=> 'topic',
+								'addPost'		=> 'post');
 $traitements_admin		= array('dashboard_users' 		=> 'user',
 							'dashboard_items' 			=> 'item',
 							'dashboard_order' 			=> 'order',
@@ -65,8 +69,13 @@ if (isset($_GET['page']))
 
 		if (isset($traitements_public[$_GET['page']]) && !empty($_POST))
 		{
-		var_dump($_POST);
-			require('apps/traitements/traitement_'.$traitements_public[$_GET['page']].'.php');
+			try{
+				require('apps/traitements/traitement_'.$traitements_public[$_GET['page']].'.php');
+			}
+			catch (Exception $e)
+			{
+				$errors = $e->getMessage();
+			}
 		}
 	}
 
@@ -89,9 +98,15 @@ if (isset($_GET['page']))
 		{
 			$page = $_GET['page'];
 		}
-		if (isset($traitement_user[$_GET['page']]) && !empty($_POST))
+		if (isset($traitements_user[$_GET['page']]) && !empty($_POST))
 		{
-			require('apps/traitements/traitement_'.$traitements_user[$_GET['page']].'.php');
+			try{
+				require('apps/traitements/traitement_'.$traitements_user[$_GET['page']].'.php');
+			}
+			catch (Exception $e)
+			{
+				$errors = $e->getMessage();
+			}
 		}
 	}
 
@@ -102,7 +117,13 @@ if (isset($_GET['page']))
 
 		if (isset($traitements_admin[$_GET['page']]) && !empty($_POST))
 		{
-			require('apps/traitements/traitement_'.$traitments_admin[$_GET['page']].'.php');
+			try{
+				require('apps/traitements/traitement_'.$traitements_admin[$_GET['page']].'.php');
+			}
+			catch (Exception $e)
+			{
+				$errors = $e->getMessage();
+			}
 		}
 	}
 
